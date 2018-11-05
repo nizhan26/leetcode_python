@@ -1,11 +1,16 @@
 #Given a string, find the length of the longest substring without repeating characters.
+
+
+#Complexity analysis
+#T: O(n)
+#S: O(c), c = 128, representing the meaningful ASCii characters
 class Solution(object):
     def lengthOfLongestSubstring(self, s):
         """
         :type s: str
         :rtype: int
         """
-    #start is the position of start in current substring    
+    #start is the position of start for current substring    
     longest, start, visited = 0, 0, [False for _ in range(128)] #possible characters
     
     for i, char in enumerate(s):
