@@ -3,7 +3,7 @@
 
 #Complexity analysis
 #T: O(n)
-#S: O(n
+#S: O(n)
 class Solution(object):
     def lengthOfLongestSubstring(self, s):
         """
