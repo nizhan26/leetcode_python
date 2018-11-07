@@ -3,7 +3,7 @@
 
 #Complexity analysis
 #T: O(n)
-#S: O(c), c = 128, representing the meaningful ASCii characters
+#S: O(n
 class Solution(object):
     def lengthOfLongestSubstring(self, s):
         """
@@ -11,17 +11,15 @@ class Solution(object):
         :rtype: int
         """
     #start is the position of start for current substring    
-    longest, start, visited = 0, 0, [False for _ in range(128)] #possible characters
+    longest, start, visited = 0, 0, {}
     
-    for i, char in enumerate(s):
-        if visited[ord(char)]:
-            while char != s[start]:
-                visited[ord(s[start])] = False
-                start += 1
-            start += 1
+    for i, v in enumerate(s):
+        # if the letter was not visited or visited but not in current substring
+        if v not in visited or start > visited[v]:
+            longest = max(longest, i-start+1)
         else:
-            visited[ord(char)] = True
+            start = visited[v] + 1
+        visited[v] = i
         
-        longest = max(longest, i-start+1)
         
     return longest
