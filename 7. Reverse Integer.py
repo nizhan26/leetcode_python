@@ -44,9 +44,9 @@ class Solution(object):
         #Solution 2: convert x to a string
         if x < 0:
             x = str(x)[1:]
-            y = -int(str(x)[::-1])
+            y = -int(x[::-1])
         else:
-            y = int(str(x)[::-1])
+            y = int(x[::-1])
         if y < -2 ** 31 or y > 2 ** 31 - 1:
             return 0
         else:
