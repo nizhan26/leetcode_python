@@ -26,37 +26,37 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 '''
 
 class Solution(object):
-  def intToRoman(self, num):
-    '''
-    :type num: int
-    :rtype: str
-    '''
-    #Solution 1
-    val = [1000, 900, 500, 400, 
-            100, 90, 50, 40, 
-            10, 9, 5, 4, 
-            1]
-    syb = ['M', 'CM', 'D', 'CD',
-            'C', 'XC', 'L', 'XL', 
-            'X', 'IX', 'V', 'IV', 
-            'I']
-    roman = ''
-    
-    i = 0
-    while num > 0:
-        for _ i range(num // val[i]):
-            roman += syb[i]
-            num -= val[i]
-        i += 1
-    return roman
-    
-    
-    #Solution 2: similar spirit, but look up the tables more directly, it's faster
-    ones = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']
-    tens = ['', 'X', 'XX','XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC']
-    hundreds = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
-    thousands = ["", "M", "MM", "MMM"]
-    
-    return thousands[num//1000] + hundreds[(num//100)%10] + tens[(num)//10%10] + ones[num%10]
+    def intToRoman(self, num):
+        '''
+        :type num: int
+        :rtype: str
+        '''
+        #Solution 1
+        val = [1000, 900, 500, 400, 
+                100, 90, 50, 40, 
+                10, 9, 5, 4, 
+                1]
+        syb = ['M', 'CM', 'D', 'CD',
+                'C', 'XC', 'L', 'XL', 
+                'X', 'IX', 'V', 'IV', 
+                'I']
+        roman = ''
+
+        i = 0
+        while num > 0:
+            for _ i range(num // val[i]):
+                roman += syb[i]
+                num -= val[i]
+            i += 1
+        return roman
+
+
+        #Solution 2: similar spirit, but look up the tables more directly, it's faster
+        ones = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']
+        tens = ['', 'X', 'XX','XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC']
+        hundreds = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
+        thousands = ["", "M", "MM", "MMM"]
+
+        return thousands[num//1000] + hundreds[(num//100)%10] + tens[(num)//10%10] + ones[num%10]
 
 
