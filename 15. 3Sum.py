@@ -23,44 +23,63 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         
-        #Solution 1: recursion
+        #Solution 1:
         #time consuming
         #T: O(n^2)
         #S: O(n)
         
         nums.sort()
-        sol = []
-        
-        
-        #scan the string to get center, set two pointers left and right each time
-        i = 0
-        while i < len(nums) - 2 and nums[i] <= 0:
-            l = i + 1
-            r = len(nums) - 1
-            
-            while l < r:
-                l = [nums[i], nums[l], nums[r]]
-                
-                if sum(l) == 0:
-                    sol.append(l)
-                    r -= 1
-                    l += 1
-                
-                    #ignore repeated numbers
-                    while nums[l] == nums[l-1] and l<r:
-                        l -= 1
-                    while nums[r] == nums[r+1] and l<r:
-                        r -= 1
-                elif sum(l) > 0:
-                    r -= 1
-                else:
-                    l += 1
-                    
-            i += 1
-                
+        n = len(nums)
+        ans = []
+        for i in range(n):
             #ignore repeated numbers
-            while i < len(nums) - 2 and nums[i] == nums[i-1]:
-                i += 1
-                
-        return sol
-                    
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            target = nums[i] * -1
+            s,e = i+1, n-1
+            while s < e:
+                if nums[s] + nums[e] == target:
+                    ans.append([nums[i], nums[s], nums[e]])
+                    s += 1
+                    #ignore repeated numbers
+                    while s<e and nums[s] == nums[s-1]:
+                        s += 1
+                elif nums[s] + nums[e] < target:
+                    s += 1
+                else:
+                    e -= 1
+        return ans
+          
+        
+        #Solution 2:
+        #get the number distribution first, faster,
+        #but solution 1 is more suitable for normal cases
+        cnt = {}
+        for n in nums:
+            cnt[n] = n in cnt and cnt[n] + 1 or 1
+        pos, neg = [], []
+        for n in cnt:
+            if n > 0:
+                pos.append(n)
+            else:
+                neg.append(n)
+        ret = []
+        if 0 in cnt and cnt[0] > 2:
+            ret.append([0,0,0])
+            
+        pos.sort()
+        neg.sort()
+        for i in pos:
+            for j in neg:
+                t = 0-i-j
+                if t in cnt:
+                    if t == i or t == j:
+                        if cnt[t] > 1:
+                            ret.append([i,j,t])
+                    elif i > t >=0 or 0 > t > j:
+                        ret.append([i, j, t])
+        return ret
+    
+    
+
+        
