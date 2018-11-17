@@ -24,12 +24,15 @@ class Solution(object):
         """
         
         #Solution 1: recursion
-        #T: O()
-        #S: O()
+        #time consuming
+        #T: O(n^2)
+        #S: O(n)
         
         nums.sort()
         sol = []
         
+        
+        #scan the string to get center, set two pointers left and right each time
         i = 0
         while i < len(nums) - 2 and nums[i] <= 0:
             l = i + 1
